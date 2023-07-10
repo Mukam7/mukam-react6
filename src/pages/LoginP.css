@@ -1,0 +1,10 @@
+.login-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-box input {
+    margin: 0px 50px 0px;
+}
