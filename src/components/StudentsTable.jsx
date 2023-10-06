@@ -2,12 +2,20 @@ import { memo } from "react";
 import { Table } from "react-bootstrap";
 import PropTypes from "prop-types";
 
-const StudentsTable = memo(({ students, editStudent }) => {
+const StudentsTable = memo(({ students, editStudent, deleteStudent }) => {
   console.log("StudentsTable");
 
-  function deleteStudent() {
-    localStorage.removeItem("students");
-  }
+  const handleDelete = (id) => {
+    const storedStudents = JSON.parse(localStorage.getItem("students"));
+
+    const updatedStudents = storedStudents.filter(
+      (student) => student.id !== id
+    );
+
+    localStorage.setItem("students", JSON.stringify(updatedStudents));
+
+    deleteStudent(id);
+  };
 
   return (
     <Table striped bordered hover>
@@ -19,12 +27,12 @@ const StudentsTable = memo(({ students, editStudent }) => {
           <th>Age</th>
           <th>Group</th>
           <th className="text-end">Description</th>
-          <th>Edit and Delate</th>
+          <th>Edit and Delete</th>
         </tr>
       </thead>
       <tbody>
         {students.map(({ firstName, lastName, age, group, comment, id }, i) => (
-          <tr key={i}>
+          <tr key={id}>
             <td>{i + 1}</td>
             <td>{firstName}</td>
             <td>{lastName}</td>
@@ -38,7 +46,10 @@ const StudentsTable = memo(({ students, editStudent }) => {
               >
                 Edit
               </button>
-              <button className="btn btn-danger" onClick={deleteStudent}>
+              <button
+                className="btn btn-danger"
+                onClick={() => handleDelete(id)}
+              >
                 Delete
               </button>
             </td>

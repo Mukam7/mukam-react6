@@ -1,10 +1,16 @@
 .col-lg-4 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: olive;
   margin-top: 15px !important;
   padding: 10px 0px 15px;
   border-radius: 25px;
   color: white !important;
+}
+
+textarea {
+  width: 350px;
+  padding: 5px;
+}
+
+.mt-3 {
+  width: 100%;
 }
